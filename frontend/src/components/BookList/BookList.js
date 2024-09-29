@@ -65,8 +65,9 @@ const BookList = () => {
           {filtredBooks.map((book, i) => (
             <li key={book.id}>
               <div className="book-info">
-                {++i}. <b>{highlightMatch(book.title, titleFilter)}</b> by{" "}
-                <i>{highlightMatch(book.author, authorFilter)}</i>
+                {++i}. <b>{highlightMatch(book.title, titleFilter)}</b>
+                &nbsp; by <i>{highlightMatch(book.author, authorFilter)}</i> (
+                {book.source})
               </div>
               <div className="book-actions">
                 <span onClick={() => handleToggleFavorite(book.id)}>
