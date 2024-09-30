@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addBook, fetchBook } from "../../redux/slices/booksSlice";
+import { setError } from "../../redux/slices/errorSlice";
 import createBookWithId from "../../utils/createBookWithId";
 import booksData from "../../data/books.json";
 import "./BookForm.css";
@@ -19,15 +20,16 @@ const BookForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && author) {
-      //console.log(addBook(book));
       dispatch(addBook(createBookWithId({ title, author }, "manual")));
       setTitle("");
       setAuthor("");
+    } else {
+      dispatch(setError("You must fill book title and author"));
     }
   };
 
   const handleAddRandomBookViaAPI = () => {
-    dispatch(fetchBook());
+    dispatch(fetchBook("http://localhost:4000/random-book"));
   };
 
   return (
